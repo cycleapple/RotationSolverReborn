@@ -1468,12 +1468,12 @@ public partial class RotationConfigWindow : Window
             else if (plugin.Name == "BossModReborn" && isBossModRebornEnabled && !isBossModEnabled)
             {
                 color = isEnabled ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed;
-                text = $"{plugin.Name} is {(isEnabled ? "installed and enabled" : "not enabled")}.";
+                text = $"{plugin.Name}：{(isEnabled ? "已安裝並啟用" : "未啟用")}。";
             }
             else
             {
                 color = isEnabled ? ImGuiColors.ParsedGreen : ImGuiColors.DalamudRed;
-                text = $"{plugin.Name} is {(isEnabled ? "installed and enabled" : "not enabled")}";
+                text = $"{plugin.Name}：{(isEnabled ? "已安裝並啟用" : "未啟用")}";
             }
 
             ImGui.PushStyleColor(ImGuiCol.Text, color);
@@ -1488,11 +1488,11 @@ public partial class RotationConfigWindow : Window
     {
         return type switch
         {
-            TargetHostileType.AllTargetsCanAttack => "All Targets Can Attack aka Tank/Autoduty Mode",
-            TargetHostileType.TargetsHaveTarget => "Targets Have A Target",
-            TargetHostileType.AllTargetsWhenSoloInDuty => "All Targets When Solo In Duty",
-            TargetHostileType.AllTargetsWhenSolo => "All Targets When Solo",
-            _ => "Unknown Target Type"
+            TargetHostileType.AllTargetsCanAttack => "攻擊範圍內的所有目標（坦克／AutoDuty 模式）",
+            TargetHostileType.TargetsHaveTarget => "僅已進入交戰的目標",
+            TargetHostileType.AllTargetsWhenSoloInDuty => "單人進入任務時攻擊所有目標",
+            TargetHostileType.AllTargetsWhenSolo => "單人時攻擊所有目標",
+            _ => "未知目標類型"
         };
     }
 
