@@ -68,7 +68,7 @@ internal class ActionTimelineWindow : Window
     {
         if (!Player.Available)
         {
-            ImGui.Text("Player not available");
+            ImGui.Text("目前無法取得玩家資訊");
             return;
         }
 

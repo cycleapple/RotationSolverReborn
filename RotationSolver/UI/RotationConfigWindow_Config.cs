@@ -222,18 +222,18 @@ public partial class RotationConfigWindow
     });
     private static readonly string[] pairsArray0 = ["↑"];
     private static readonly string[] pairsArray1 = ["↓"];
-    private static readonly string[] pairsArray2 = ["Delete"];
+    private static readonly string[] pairsArray2 = ["刪除"];
 
     private static void DrawInternalTab()
     {
-        ImGui.Text($"Configs/Backups location: {Svc.PluginInterface.ConfigFile.Directory}");
+        ImGui.Text($"設定／備份位置：{Svc.PluginInterface.ConfigFile.Directory}");
         
-        if (ImGui.Button("Backup Configs"))
+        if (ImGui.Button("備份設定"))
         {
             Service.Config.Backup();
         }
         
-        if (ImGui.Button("Restore Configs"))
+        if (ImGui.Button("還原設定"))
         {
             Service.Config.Restore();
         }

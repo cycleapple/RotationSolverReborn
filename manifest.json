@@ -2,7 +2,7 @@
   "Author": "The Combat Reborn Team",
   "Name": "Rotation Solver Reborn",
   "InternalName": "RotationSolver",
-  "RepoUrl": "https://github.com/FFXIV-CombatReborn/RotationSolverReborn",
+  "RepoUrl": "https://github.com/cycleapple/RotationSolverReborn/tree/api13-tw",
   "Description": "分析每一幀的戰鬥資訊並找出最佳技能。\n\n分析內容包含小隊成員與敵對目標狀態、技能冷卻、角色 MP 與 HP、角色位置、敵對目標詠唱狀態、連擊、戰鬥時間與玩家等級等。\n接著會在熱鍵欄醒目提示最佳技能，或協助執行該技能。\n本插件為「一般戰鬥」設計，並非專門針對零式或絕境戰；請謹慎使用。",
   "ApplicableVersion": "any",
   "DalamudApiLevel": 13,

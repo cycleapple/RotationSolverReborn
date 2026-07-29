@@ -10,7 +10,7 @@ description: |-
 
   本插件為「一般戰鬥」設計，並非專門針對零式或絕境戰；請謹慎使用。
 punchline: 分析每一幀的戰鬥資訊並找出最佳技能。
-repo_url: https://github.com/FFXIV-CombatReborn/RotationSolverReborn
+repo_url: https://github.com/cycleapple/RotationSolverReborn/tree/api13-tw
 icon_url: https://raw.githubusercontent.com/FFXIV-CombatReborn/RotationSolverReborn/main/Images/Logo.png
 dalamud_api_level: 13
 tags:

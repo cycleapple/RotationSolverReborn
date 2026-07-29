@@ -82,10 +82,10 @@ internal class ControlWindow : CtrlWindow
         columnWidth = Math.Max(columnWidth, ImGui.GetCursorPosX());
 
         TargetingType autoMode = DataCenter.TargetingType;
-        ImGui.Text(" Targeting: " + autoMode.ToString());
+        ImGui.Text(" 目標模式：" + autoMode.GetDescription());
 
         ConfigTypes.AoEType aoeType = Service.Config.AoEType;
-        if (ImGuiHelper.SelectableButton("AoE: " + aoeType.ToString()))
+        if (ImGuiHelper.SelectableButton("範圍模式：" + aoeType.ToString()))
         {
             aoeType = (ConfigTypes.AoEType)(((int)aoeType + 1) % 3);
             Service.Config.AoEType = aoeType;
@@ -104,7 +104,7 @@ internal class ControlWindow : CtrlWindow
             pushedStyleColor = true; // Indicate that a style color has been pushed
         }
 
-        if (ImGuiHelper.SelectableButton("Burst"))
+        if (ImGuiHelper.SelectableButton("爆發"))
         {
             Service.Config.AutoBurst.Value = !isBurst;
         }
@@ -203,7 +203,7 @@ internal class ControlWindow : CtrlWindow
 
         ImGui.Spacing();
 
-        ImGui.Text("CMD:");
+        ImGui.Text("指定技能：");
         ImGui.SameLine();
 
         _ = DrawIAction(DataCenter.CommandNextAction, Service.Config.ControlWindow0GCDSize, 1);
@@ -214,7 +214,7 @@ internal class ControlWindow : CtrlWindow
         if (group)
         {
             ImGui.Text(DataCenter.CurrentTargetToHostileType.GetDescription());
-            ImGui.Text("Auto: " + DataCenter.AutoStatus.ToString());
+            ImGui.Text("自動狀態：" + DataCenter.AutoStatus.ToString());
         }
     }
 

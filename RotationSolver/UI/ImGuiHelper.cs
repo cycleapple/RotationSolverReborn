@@ -117,7 +117,7 @@ internal static class ImGuiHelper
 
         if (items == null || items.Length == 0)
         {
-            ImGui.TextColored(ImGuiColors.DalamudRed, "ConfigWindow_Condition_NoItemsWarning".Loc("There are no items!"));
+            ImGui.TextColored(ImGuiColors.DalamudRed, "ConfigWindow_Condition_NoItemsWarning".Loc("沒有可用項目！"));
             return;
         }
 
