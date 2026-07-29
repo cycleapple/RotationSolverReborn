@@ -1,6 +1,6 @@
 ﻿namespace RotationSolver.Basic.Configuration.Conditions;
 
-[Description("Named Condition")]
+[Description("命名條件")]
 internal class NamedCondition : DelayCondition
 {
     public string ConditionName = "Not Chosen";

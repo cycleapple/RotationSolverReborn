@@ -476,7 +476,22 @@ public partial class RotationConfigWindow : Window
                     continue;
                 }
 
-                string displayName = item.ToString();
+                string displayName = item switch
+                {
+                    RotationConfigWindowTab.Main => "主要",
+                    RotationConfigWindowTab.Job => "職業",
+                    RotationConfigWindowTab.Duty => "任務",
+                    RotationConfigWindowTab.Actions => "技能",
+                    RotationConfigWindowTab.List => "清單",
+                    RotationConfigWindowTab.Basic => "基本",
+                    RotationConfigWindowTab.UI => "介面",
+                    RotationConfigWindowTab.Auto => "自動",
+                    RotationConfigWindowTab.Target => "目標",
+                    RotationConfigWindowTab.Extra => "額外",
+                    RotationConfigWindowTab.Debug => "偵錯",
+                    RotationConfigWindowTab.AutoDuty => "AutoDuty",
+                    _ => item.ToString(),
+                };
                 if (item == RotationConfigWindowTab.Job && Player.Object != null)
                 {
                     displayName = Player.Job.ToString(); // Use the current player's job name
@@ -490,11 +505,11 @@ public partial class RotationConfigWindow : Window
 
                     displayName = true switch
                     {
-                        var _ when DataCenter.IsInOccultCrescentOp => $"Duty - {DutyRotation.ActivePhantomJob}",
-                        var _ when DataCenter.InVariantDungeon => "Duty - Variant",
-                        var _ when DataCenter.IsInBozja => "Duty - Bozja",
-                        var _ when DataCenter.IsInMonsterHunterDuty => "Duty - Monster Hunter",
-                        _ => "Duty",
+                        var _ when DataCenter.IsInOccultCrescentOp => $"任務－{DutyRotation.ActivePhantomJob}",
+                        var _ when DataCenter.InVariantDungeon => "任務－多變迷宮",
+                        var _ when DataCenter.IsInBozja => "任務－南方博茲雅戰線",
+                        var _ when DataCenter.IsInMonsterHunterDuty => "任務－魔物獵人",
+                        _ => "任務",
                     };
                 }
 
@@ -624,7 +639,7 @@ public partial class RotationConfigWindow : Window
                     ImGui.TextWrapped(text);
                 }, wholeWidth, textWidth);
                 ImGui.PopStyleColor();
-                ImguiTooltips.HoveredTooltip("Please update your rotations!");
+            ImguiTooltips.HoveredTooltip("請更新循環！");
                 return;
             }
             float availableWidth = ImGui.GetContentRegionAvail().X;
@@ -781,7 +796,7 @@ public partial class RotationConfigWindow : Window
             }
         }
 
-        string warning = "Game version: " + _curRotationAttribute.GameVersion;
+                string warning = "遊戲版本：" + _curRotationAttribute.GameVersion;
         warning += "\n \n" + UiString.ConfigWindow_Helper_SwitchRotation.GetDescription();
         ImguiTooltips.HoveredTooltip(warning);
     }
@@ -1458,12 +1473,12 @@ public partial class RotationConfigWindow : Window
             if (plugin.Name == "Boss Mod" && isBossModEnabled && isBossModRebornEnabled)
             {
                 color = ImGuiColors.DalamudYellow;
-                text = $"{plugin.Name} is {(isEnabled ? "installed and enabled" : "not enabled")}. Both Boss Mods cannot be installed and enabled at the same time. Please disable Boss Mod.";
+                    text = $"{plugin.Name}：{(isEnabled ? "已安裝並啟用" : "未啟用")}。兩種 BossMod 不能同時安裝並啟用，請停用 Boss Mod。";
             }
             else if (plugin.Name == "Boss Mod" && isBossModEnabled && !isBossModRebornEnabled)
             {
                 color = isEnabled ? ImGuiColors.DalamudYellow : ImGuiColors.DalamudRed;
-                text = $"{plugin.Name} is {(isEnabled ? "installed and enabled" : "not enabled")}. Please use BossModReborn instead, BMR has specific integration with RSR that improves RSRs ability to react to combat i.e. Gaze effects.";
+                    text = $"{plugin.Name}：{(isEnabled ? "已安裝並啟用" : "未啟用")}。建議改用 BossModReborn；BMR 提供 RSR 專用整合，可改善對凝視等戰鬥效果的反應。";
             }
             else if (plugin.Name == "BossModReborn" && isBossModRebornEnabled && !isBossModEnabled)
             {
@@ -2582,8 +2597,8 @@ public partial class RotationConfigWindow : Window
 
     private static void FromClipBoardButton(HashSet<uint> items)
     {
-        const string CopyErrorMessage = "Failed to copy the values to the clipboard.";
-        const string PasteErrorMessage = "Failed to copy the values from the clipboard.";
+        const string CopyErrorMessage = "無法將數值複製到剪貼簿。";
+        const string PasteErrorMessage = "無法從剪貼簿匯入數值。";
 
         if (ImGui.Button(UiString.ConfigWindow_Actions_Copy.GetDescription()))
         {

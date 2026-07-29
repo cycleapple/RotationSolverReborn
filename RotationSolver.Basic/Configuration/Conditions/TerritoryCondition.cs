@@ -1,6 +1,6 @@
 ﻿namespace RotationSolver.Basic.Configuration.Conditions;
 
-[Description("Territory Condition")]
+[Description("區域條件")]
 internal class TerritoryCondition : DelayCondition
 {
     public TerritoryConditionType TerritoryConditionType = TerritoryConditionType.TerritoryContentType;
@@ -35,12 +35,12 @@ internal class TerritoryCondition : DelayCondition
 
 internal enum TerritoryConditionType : byte
 {
-    [Description("Territory Content Type")]
+    [Description("區域內容類型")]
     TerritoryContentType,
 
-    [Description("Territory Name")]
+    [Description("區域名稱")]
     TerritoryName,
 
-    [Description("Duty Name")]
+    [Description("任務名稱")]
     DutyName,
 }

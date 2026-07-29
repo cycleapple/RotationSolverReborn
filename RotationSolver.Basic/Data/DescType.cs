@@ -13,78 +13,78 @@ public enum DescType : byte
     /// <summary>
     /// Burst actions.
     /// </summary>
-    [Description("Burst Actions")]
+    [Description("爆發技能")]
     BurstActions,
 
     /// <summary>
     /// Area heal GCDs.
     /// </summary>
-    [Description("Heal Area GCD")]
+    [Description("範圍治療 GCD")]
     HealAreaGCD,
 
     /// <summary>
     /// Area heal oGCDs.
     /// </summary>
-    [Description("Heal Area Ability")]
+    [Description("範圍治療能力技")]
     HealAreaAbility,
 
     /// <summary>
     /// Single target heal GCDs.
     /// </summary>
-    [Description("Heal Single GCD")]
+    [Description("單體治療 GCD")]
     HealSingleGCD,
 
     /// <summary>
     /// Single target heal oGCDs.
     /// </summary>
-    [Description("Heal Single Ability")]
+    [Description("單體治療能力技")]
     HealSingleAbility,
 
     /// <summary>
     /// Area defensive GCDs (shields, mitigation, etc).
     /// </summary>
-    [Description("Defense Area GCD")]
+    [Description("範圍防禦 GCD")]
     DefenseAreaGCD,
 
     /// <summary>
     /// Area defensive oGCDs (shields, mitigation, etc).
     /// </summary>
-    [Description("Defense Area Ability")]
+    [Description("範圍防禦能力技")]
     DefenseAreaAbility,
 
     /// <summary>
     /// Single target defensive GCDs (shields, mitigation, etc).
     /// </summary>
-    [Description("Defense Single GCD")]
+    [Description("單體防禦 GCD")]
     DefenseSingleGCD,
 
     /// <summary>
     /// Single target defensive oGCDs (shields, mitigation, etc).
     /// </summary>
-    [Description("Defense Single Ability")]
+    [Description("單體防禦能力技")]
     DefenseSingleAbility,
 
     /// <summary>
     /// Move forward GCD.
     /// </summary>
-    [Description("Move Forward GCD")]
+    [Description("向前移動 GCD")]
     MoveForwardGCD,
 
     /// <summary>
     /// Move forward ability.
     /// </summary>
-    [Description("Move Forward Ability")]
+    [Description("向前移動能力技")]
     MoveForwardAbility,
 
     /// <summary>
     /// Move back ability.
     /// </summary>
-    [Description("Move Back Ability")]
+    [Description("向後移動能力技")]
     MoveBackAbility,
 
     /// <summary>
     /// Speed ability.
     /// </summary>
-    [Description("Speed Ability")]
+    [Description("加速能力技")]
     SpeedAbility,
 }

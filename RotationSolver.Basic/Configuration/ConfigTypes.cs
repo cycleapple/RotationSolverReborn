@@ -13,16 +13,19 @@
             /// <summary>
             /// No AoE.
             /// </summary>
+            [Description("停用")]
             Off = 0,
 
             /// <summary>
             /// Only single-target AoE.
             /// </summary>
+            [Description("順劈")]
             Cleave = 1,
 
             /// <summary>
             /// Full AoE.
             /// </summary>
+            [Description("完整")]
             Full = 2,
         }
     }

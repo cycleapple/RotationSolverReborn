@@ -28,40 +28,40 @@ internal enum RotationConfigWindowTab : byte
     [TabSkip] About,
     [TabSkip] Rotation,
 
-    [Description("Useful information and macro list.")]
+    [Description("實用資訊與巨集清單。")]
     [TabIcon(Icon = 4)] Main,
 
-    [Description("Rotation specific configs.")]
+    [Description("目前循環的專用設定。")]
     [TabIcon(Icon = 4)] Job,
 
-    [Description("Configure Duty Rotation.")]
+    [Description("設定任務循環。")]
     [TabIcon(Icon = 4)] Duty,
 
-    [Description("Configure abilities and custom conditions for your current job.")]
+    [Description("設定目前職業的技能與自訂條件。")]
     [TabIcon(Icon = 4)] Actions,
 
-    [Description("Configure reactive actions and status effect lists.")]
+    [Description("設定反應技能與狀態效果清單。")]
     [TabIcon(Icon = 21)] List,
 
-    [Description("Configure basic settings.")]
+    [Description("設定基本選項。")]
     [TabIcon(Icon = 14)] Basic,
 
-    [Description("Configure user interface settings.")]
+    [Description("設定使用者介面。")]
     [TabIcon(Icon = 42)] UI,
 
-    [Description("Configure general action usage and control settings.")]
+    [Description("設定一般技能使用與控制選項。")]
     [TabIcon(Icon = 29)] Auto,
 
-    [Description("Configure targeting settings.")]
+    [Description("設定目標選取。")]
     [TabIcon(Icon = 16)] Target,
 
-    [Description("Configure optional helpful features.")]
+    [Description("設定選用的輔助功能。")]
     [TabIcon(Icon = 51)] Extra,
 
-    [Description("Debug options for developers and rotation writers (disable when not in use).")]
+    [Description("提供給開發者與循環作者的偵錯選項（不使用時請停用）。")]
     [TabIcon(Icon = 5)] Debug,
 
-    [Description("Configure AutoDuty settings and view related information.")]
+    [Description("設定 AutoDuty 選項並查看相關資訊。")]
     [TabIcon(Icon = 4)] AutoDuty,
 }
 

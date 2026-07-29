@@ -1,6 +1,6 @@
 ﻿namespace RotationSolver.Basic.Configuration.Conditions;
 
-[Description("Rotation Condition")]
+[Description("循環條件")]
 internal class RotationCondition : DelayCondition
 {
     public ComboConditionType ComboConditionType = ComboConditionType.Float;
@@ -112,15 +112,15 @@ internal class RotationCondition : DelayCondition
 
 internal enum ComboConditionType : byte
 {
-    [Description("Boolean")]
+    [Description("布林值")]
     Bool,
 
-    [Description("Byte")]
+    [Description("整數")]
     Integer,
 
-    [Description("Float")]
+    [Description("浮點數")]
     Float,
 
-    [Description("Last")]
+    [Description("上一個技能")]
     Last,
 }

@@ -44,30 +44,30 @@ public enum ConfigUnitType : byte
     /// <summary>
     /// 
     /// </summary>
-    [Description("Time Unit, in seconds.")]
+    [Description("時間單位：秒")]
     Seconds,
 
     /// <summary>
     /// 
     /// </summary>
-    [Description("Angle Unit, in degrees.")]
+    [Description("角度單位：度")]
     Degree,
 
     /// <summary>
     /// 
     /// </summary>
-    [Description("Distance Unit, in yalms.")]
+    [Description("距離單位：公尺")]
     Yalms,
 
     /// <summary>
     /// 
     /// </summary>
-    [Description("Ratio Unit, as percentage.")]
+    [Description("比例單位：百分比")]
     Percent,
 
     /// <summary>
     /// 
     /// </summary>
-    [Description("Display Unit, in pixels.")]
+    [Description("顯示單位：像素")]
     Pixels,
 }

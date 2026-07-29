@@ -187,7 +187,7 @@ public partial class RotationConfigWindow
                 (UiString.ConfigWindow_Actions_MoveUp.GetDescription(), Up, pairsArray0),
                 (UiString.ConfigWindow_Actions_MoveDown.GetDescription(), Down, pairsArray1));
 
-            string[] names = Enum.GetNames<TargetingType>();
+            string[] names = Enum.GetValues<TargetingType>().Select(x => x.GetDescription()).ToArray();
             int targetingType = (int)Service.Config.TargetingTypes[i];
             string text = UiString.ConfigWindow_Param_HostileCondition.GetDescription();
             ImGui.SetNextItemWidth(ImGui.CalcTextSize(text).X + (30 * Scale));

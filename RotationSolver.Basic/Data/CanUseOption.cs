@@ -14,42 +14,42 @@ public enum CanUseOption : byte
     /// <summary>
     /// Skip status provide check.
     /// </summary>
-    [Description("Skip status provide check")]
+    [Description("略過狀態提供檢查")]
     SkipStatusProvideCheck = 1 << 0,
 
     /// <summary>
     /// Skip combo check.
     /// </summary>
-    [Description("Skip combo check")]
+    [Description("略過連擊檢查")]
     SkipComboCheck = 1 << 1,
 
     /// <summary>
     /// Skip casting and moving check.
     /// </summary>
-    [Description("Skip casting and moving check")]
+    [Description("略過詠唱與移動檢查")]
     SkipCastingCheck = 1 << 2,
 
     /// <summary>
     /// Indicates that all stacks should be used up.
     /// </summary>
-    [Description("Use up all stacks")]
+    [Description("用盡所有積蓄次數")]
     UsedUp = 1 << 3,
 
     /// <summary>
     /// Indicates that the action is the last ability.
     /// </summary>
-    [Description("On the last ability")]
+    [Description("僅於最後一個能力技")]
     OnLastAbility = 1 << 4,
 
     /// <summary>
     /// Skip clipping check.
     /// </summary>
-    [Description("Skip clipping check")]
+    [Description("略過技能卡頓檢查")]
     SkipClippingCheck = 1 << 5,
 
     /// <summary>
     /// Skip AoE check.
     /// </summary>
-    [Description("Skip AoE check")]
+    [Description("略過範圍技能檢查")]
     SkipAoeCheck = 1 << 6,
 }

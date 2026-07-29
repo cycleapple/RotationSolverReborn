@@ -3,7 +3,7 @@ using RotationSolver.Basic.Traits;
 
 namespace RotationSolver.Basic.Configuration.Conditions;
 
-[Description("Trait Condition")]
+[Description("特性條件")]
 internal class TraitCondition : DelayCondition
 {
     public uint TraitID { get; set; } = 0;

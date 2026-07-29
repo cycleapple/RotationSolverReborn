@@ -8,18 +8,18 @@ public enum TinctureUseType : byte
     /// <summary>
     /// Do not use tinctures.
     /// </summary>
-    [Description("Do not use Gemdraughts/Tinctures/Pots")]
+    [Description("不使用寶藥／幻藥／藥水")]
     Nowhere,
 
     /// <summary>
     /// Only use tinctures in high-end duties.
     /// </summary>
-    [Description("Use Gemdraughts/Tinctures/Pots in High-End Duties")]
+    [Description("只在高難度任務使用寶藥／幻藥／藥水")]
     InHighEndDuty,
 
     /// <summary>
     /// Use tinctures anywhere.
     /// </summary>
-    [Description("Use Gemdraughts/Tinctures/Pots Anywhere")]
+    [Description("在任何地方使用寶藥／幻藥／藥水")]
     Anywhere,
 }

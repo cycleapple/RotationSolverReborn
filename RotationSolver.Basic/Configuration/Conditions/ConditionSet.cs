@@ -1,6 +1,6 @@
 ﻿namespace RotationSolver.Basic.Configuration.Conditions
 {
-    [Description("Condition Set")]
+    [Description("條件組")]
     internal class ConditionSet : DelayCondition
     {
         public List<ICondition> Conditions { get; set; } = [];

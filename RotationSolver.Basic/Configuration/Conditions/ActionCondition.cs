@@ -1,6 +1,6 @@
 ﻿namespace RotationSolver.Basic.Configuration.Conditions;
 
-[Description("Action Condition")]
+[Description("技能條件")]
 internal class ActionCondition : DelayCondition
 {
     internal IBaseAction? _action = null;
@@ -77,30 +77,30 @@ internal class ActionCondition : DelayCondition
 
 internal enum ActionConditionType : byte
 {
-    [Description("Elapsed")]
+    [Description("已經過")]
     Elapsed,
 
-    [Description("Elapsed GCD")]
+    [Description("已經過 GCD")]
     ElapsedGCD,
 
-    [Description("Remain Time")]
+    [Description("剩餘時間")]
     Remain,
 
-    [Description("Remain Time GCD")]
+    [Description("剩餘時間（GCD）")]
     RemainGCD,
 
-    [Description("Can Use")]
+    [Description("可使用")]
     CanUse,
 
-    [Description("Enough Level")]
+    [Description("等級足夠")]
     EnoughLevel,
 
-    [Description("Is CoolDown")]
+    [Description("正在冷卻")]
     IsCoolDown,
 
-    [Description("Current Charges")]
+    [Description("目前積蓄次數")]
     CurrentCharges,
 
-    [Description("Max Charges")]
+    [Description("最大積蓄次數")]
     MaxCharges,
 }

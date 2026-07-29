@@ -407,7 +407,7 @@ public static partial class RSCommands
 
                     if (Service.Config.ShowToastsAboutDoAction)
                     {
-                        Svc.Toasts.ShowQuest($"Inserted action {iAct.Name} with time {time}",
+                    Svc.Toasts.ShowQuest($"已插入技能 {iAct.Name}，時間 {time}",
                             new Dalamud.Game.Gui.Toast.QuestToastOptions()
                             {
                                 IconId = iAct.IconID,

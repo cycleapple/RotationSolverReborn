@@ -8,7 +8,7 @@ namespace RotationSolver.Basic.Configuration.Conditions;
 /// <summary>
 /// Represents a condition based on the target.
 /// </summary>
-[Description("Target Condition")]
+[Description("目標條件")]
 internal class TargetCondition : DelayCondition
 {
     internal IBaseAction? _action;
@@ -162,52 +162,52 @@ internal class TargetCondition : DelayCondition
 
 internal enum TargetType : byte
 {
-    [Description("Hostile Target")]
+    [Description("敵對目標")]
     HostileTarget,
 
-    [Description("Player")]
+    [Description("玩家")]
     Player,
 
-    [Description("Target")]
+    [Description("目前目標")]
     Target,
 }
 
 internal enum TargetConditionType : byte
 {
-    [Description("Is Null")]
+    [Description("不存在")]
     IsNull,
 
-    [Description("Has status")]
+    [Description("具有狀態")]
     HasStatus,
 
-    [Description("Is Dying")]
+    [Description("即將死亡")]
     IsDying,
 
-    [Description("Is Boss From TTK")]
+    [Description("依預估擊殺時間判定為頭目")]
     IsBossFromTTK,
 
-    [Description("Is Boss From Icon")]
+    [Description("依圖示判定為頭目")]
     IsBossFromIcon,
 
-    [Description("In Combat")]
+    [Description("戰鬥中")]
     InCombat,
 
-    [Description("Distance")]
+    [Description("距離")]
     Distance,
 
-    [Description("Status end")]
+    [Description("狀態結束")]
     StatusEnd,
 
-    [Description("Status End GCD")]
+    [Description("狀態結束（GCD）")]
     StatusEndGCD,
 
-    [Description("Casting Action")]
+    [Description("正在詠唱的技能")]
     CastingAction,
 
-    [Description("Casting Action Time Until")]
+    [Description("技能詠唱剩餘時間")]
     CastingActionTime,
 
-    [Description("Time To Kill")]
+    [Description("預估擊殺時間")]
     TimeToKill,
 
     [Description("HP")]
@@ -219,9 +219,9 @@ internal enum TargetConditionType : byte
     [Description("MP")]
     MP,
 
-    [Description("Target Name")]
+    [Description("目標名稱")]
     TargetName,
 
-    [Description("Target Role")]
+    [Description("目標職責")]
     TargetRole,
 }

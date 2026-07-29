@@ -8,30 +8,30 @@ public enum RaiseType : byte
     /// <summary>
     /// Raise only party members.
     /// </summary>
-    [Description("Raise only party members.")]
+    [Description("只復活小隊成員")]
     PartyOnly,
 
     /// <summary>
     /// Raise party members and alliance supports.
     /// </summary>
-    [Description("Raise party members and alliance supports.")]
+    [Description("復活小隊成員與團隊中的防護／治療職業")]
     PartyAndAllianceSupports,
 
     /// <summary>
     /// Raise party members and alliance healers.
     /// </summary>
-    [Description("Raise party members and alliance healers.")]
+    [Description("復活小隊成員與團隊中的治療職業")]
     PartyAndAllianceHealers,
 
     /// <summary>
     /// Raise All In Duty.
     /// </summary>
-    [Description("Raise All In Duty.")]
+    [Description("任務中復活所有玩家")]
     All,
 
     /// <summary>
     /// Raise all.
     /// </summary>
-    [Description("Raise All.")]
+    [Description("復活所有玩家")]
     AllOutOfDuty,
 }
