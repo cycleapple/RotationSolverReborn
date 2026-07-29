@@ -7,7 +7,7 @@
 		<Platforms>AnyCPU</Platforms>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
-		<Version>7.3.5.0</Version>
+		<Version>7.3.5.1</Version>
     </PropertyGroup>
 	
     <ItemGroup>
