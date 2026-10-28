@@ -444,6 +444,9 @@ internal partial class Configs : IPluginConfiguration
     [ConditionBool, UI("記錄擊退技能", Filter = List2)]
     private static readonly bool _recordKnockbackies = false;
 
+    [UI("使用額外條件", Description = "啟用設定項目的強制啟用／禁用條件。技能頁的強制／禁用條件可直接設定。", Filter = BasicParams)]
+    public bool UseAdditionalConditions { get; set; } = false;
+
     [ConditionBool, UI("自動設定青魔法", Description = "使用青魔法師循環時，RSR 可自動將魔法書設定為該循環所需的技能。", Filter = Extra)]
     private static readonly bool _setBluActions2 = false;
 

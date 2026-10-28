@@ -148,13 +148,13 @@ namespace RotationSolver.Data
         [Description("強制條件的優先度較高。符合強制條件時會忽略停用條件。")]
         ConfigWindow_Actions_ConditionDescription,
 
-        [Description("強制條件（不支援）")]
+        [Description("強制啟用條件")]
         ConfigWindow_Actions_ForcedConditionSet,
 
         [Description("強制自動使用技能的條件")]
         ConfigWindow_Actions_ForcedConditionSet_Description,
 
-        [Description("停用條件（不支援）")]
+        [Description("強制禁用條件")]
         ConfigWindow_Actions_DisabledConditionSet,
 
         [Description("停用自動使用技能的條件")]
@@ -358,7 +358,7 @@ namespace RotationSolver.Data
         [Description("RSR 應如何使用治療技能")]
         ConfigWindow_Auto_HealingCondition_Description,
 
-        [Description("自訂狀態條件（不支援）")]
+        [Description("自訂狀態條件")]
         ConfigWindow_Auto_StateCondition,
 
         [Description("範圍治療強制條件")]

@@ -12,6 +12,7 @@ namespace RotationSolver.Basic.Configuration.Conditions;
 internal class TargetCondition : DelayCondition
 {
     internal IBaseAction? _action;
+    private ICustomRotation? _resolvedRotation;
     public ActionID ID { get; set; } = ActionID.None;
 
     public bool FromSelf;
@@ -34,6 +35,14 @@ internal class TargetCondition : DelayCondition
     /// <returns><c>true</c> if the condition is met; otherwise, <c>false</c>.</returns>
     protected override bool IsTrueInside(ICustomRotation rotation)
     {
+        // Resolve saved action targets during evaluation, even when the editor was never opened.
+        if (ID == ActionID.None || !ReferenceEquals(_resolvedRotation, rotation))
+        {
+            _action = null;
+        }
+        _resolvedRotation = rotation;
+        _ = CheckBaseAction(rotation, ID, ref _action);
+
         IBattleChara? tar = _action?.TargetInfo.FindTarget(true, false, false)?.Target ?? TargetType switch
         {
             TargetType.Target => Svc.Targets.Target as IBattleChara,

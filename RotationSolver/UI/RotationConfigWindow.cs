@@ -2250,6 +2250,9 @@ public partial class RotationConfigWindow : Window
 
             DrawConfigsOfAction();
             DrawActionDebug();
+
+            ImGui.TextWrapped(UiString.ConfigWindow_Actions_ConditionDescription.GetDescription());
+            _sequencerList?.Draw();
         }
 
         static void DrawConfigsOfAction()
@@ -2444,6 +2447,32 @@ public partial class RotationConfigWindow : Window
     private static IAction? _activeAction;
 
     private static readonly CollapsingHeaderGroup _actionsList = new([])
+    {
+        HeaderSize = 18,
+    };
+
+    private static readonly CollapsingHeaderGroup _sequencerList = new(new()
+    {
+        { UiString.ConfigWindow_Actions_ForcedConditionSet.GetDescription, () =>
+        {
+            ImGui.TextWrapped(UiString.ConfigWindow_Actions_ForcedConditionSet_Description.GetDescription());
+
+            ICustomRotation? rotation = DataCenter.CurrentRotation;
+            Basic.Configuration.Conditions.MajorConditionValue set = DataCenter.CurrentConditionValue;
+
+            if (set == null || _activeAction == null || rotation == null) { return; } set.GetCondition(_activeAction.ID)?.DrawMain(rotation);
+        } },
+
+        { UiString.ConfigWindow_Actions_DisabledConditionSet.GetDescription, () =>
+        {
+            ImGui.TextWrapped(UiString.ConfigWindow_Actions_DisabledConditionSet_Description.GetDescription());
+
+            ICustomRotation? rotation = DataCenter.CurrentRotation;
+            Basic.Configuration.Conditions.MajorConditionValue set = DataCenter.CurrentConditionValue;
+
+            if (set == null || _activeAction == null || rotation == null) { return; } set.GetDisabledCondition(_activeAction.ID)?.DrawMain(rotation);
+        } },
+    })
     {
         HeaderSize = 18,
     };

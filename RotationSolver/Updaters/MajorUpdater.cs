@@ -157,11 +157,11 @@ internal static class MajorUpdater
                 TargetUpdater.UpdateTargets();
             }
 
+            ActionSequencerUpdater.UpdateActionSequencerAction();
+
             StateUpdater.UpdateState();
 
             ActionUpdater.UpdateNextAction();
-
-            ActionSequencerUpdater.UpdateActionSequencerAction();
         }
         catch (Exception ex)
         {

@@ -36,6 +36,7 @@ public partial class RotationConfigWindow
     private static readonly CollapsingHeaderGroup _baseHeader = new(new Dictionary<Func<string>, Action>
     {
         { UiString.ConfigWindow_Basic_Timer.GetDescription, DrawBasicTimer },
+        { UiString.ConfigWindow_Basic_NamedConditions.GetDescription, DrawBasicNamedConditions },
         { UiString.ConfigWindow_Basic_Others.GetDescription, DrawBasicOthers },
     });
 
@@ -46,8 +47,144 @@ public partial class RotationConfigWindow
 
     private static readonly Dictionary<int, bool> _isOpen = [];
 
+    private static void DrawBasicNamedConditions()
+    {
+        // Ensure there is always an empty named condition at the end
+        bool hasEmpty = false;
+        (string Name, ConditionSet Condition)[] namedConditions = DataCenter.CurrentConditionValue.NamedConditions;
+        for (int i = 0; i < namedConditions.Length; i++)
+        {
+            if (string.IsNullOrEmpty(namedConditions[i].Name))
+            {
+                hasEmpty = true;
+                break;
+            }
+        }
+        if (!hasEmpty)
+        {
+            // Append (string.Empty, new ConditionSet()) to the array
+            (string Name, ConditionSet Condition)[] oldArray = DataCenter.CurrentConditionValue.NamedConditions;
+            (string Name, ConditionSet Condition)[] newArray = new (string Name, ConditionSet Condition)[oldArray.Length + 1];
+            for (int i = 0; i < oldArray.Length; i++)
+            {
+                newArray[i] = oldArray[i];
+            }
+            newArray[oldArray.Length] = (string.Empty, new ConditionSet());
+            DataCenter.CurrentConditionValue.NamedConditions = newArray;
+        }
+
+        ImGui.Spacing();
+
+        int removeIndex = -1;
+        for (int i = 0; i < DataCenter.CurrentConditionValue.NamedConditions.Length; i++)
+        {
+            bool value = _isOpen.TryGetValue(i, out bool open) && open;
+
+            FontAwesomeIcon toggle = value ? FontAwesomeIcon.ArrowUp : FontAwesomeIcon.ArrowDown;
+            float ItemSpacing = 20 * Scale; // Changed from const to local variable
+            float width = ImGui.GetWindowWidth() - ImGuiEx.CalcIconSize(FontAwesomeIcon.Ban).X
+                - ImGuiEx.CalcIconSize(toggle).X - (ImGui.GetStyle().ItemSpacing.X * 2) - ItemSpacing;
+
+            ImGui.SetNextItemWidth(width);
+            _ = ImGui.InputTextWithHint($"##Rotation Solver Named Condition{i}", UiString.ConfigWindow_Condition_ConditionName.GetDescription(),
+                ref DataCenter.CurrentConditionValue.NamedConditions[i].Name, 1024);
+
+            ImGui.SameLine();
+
+            if (ImGuiEx.IconButton(toggle, $"##Rotation Solver Toggle Named Condition{i}"))
+            {
+                _isOpen[i] = value = !value;
+            }
+
+            ImGui.SameLine();
+
+            if (ImGuiEx.IconButton(FontAwesomeIcon.Ban, $"##Rotation Solver Remove Named Condition{i}"))
+            {
+                removeIndex = i;
+            }
+
+            if (value && DataCenter.CurrentRotation != null)
+            {
+                DataCenter.CurrentConditionValue.NamedConditions[i].Condition?.DrawMain(DataCenter.CurrentRotation);
+            }
+        }
+
+        // Remove the named condition if needed
+        if (removeIndex > -1)
+        {
+            // Convert array to list, remove, then back to array
+            (string Name, ConditionSet Condition)[] oldArray = DataCenter.CurrentConditionValue.NamedConditions;
+            List<(string Name, ConditionSet Condition)> newList = new(oldArray.Length - 1);
+            for (int i = 0; i < oldArray.Length; i++)
+            {
+                if (i != removeIndex)
+                {
+                    newList.Add(oldArray[i]);
+                }
+            }
+            DataCenter.CurrentConditionValue.NamedConditions = newList.ToArray();
+        }
+    }
+
     private static void DrawBasicOthers()
     {
+        MajorConditionValue set = DataCenter.CurrentConditionValue;
+
+        const string popUpId = "Right Set Popup";
+        if (ImGui.Selectable(set.Name, false, ImGuiSelectableFlags.None, new Vector2(0, 20)))
+        {
+            ImGui.OpenPopup(popUpId);
+        }
+        ImguiTooltips.HoveredTooltip(UiString.ConfigWindow_ConditionSetDesc.GetDescription());
+
+        using ImRaii.IEndObject popup = ImRaii.Popup(popUpId);
+        if (popup)
+        {
+            MajorConditionValue[] combos = DataCenter.ConditionSets;
+            for (int i = 0; i < combos.Length; i++)
+            {
+                void DeleteFile()
+                {
+                    ActionSequencerUpdater.Delete(combos[i].Name);
+                }
+
+                if (combos[i].Name == set.Name)
+                {
+                    ImGuiHelper.SetNextWidthWithName(set.Name);
+                    _ = ImGui.InputText("##MajorConditionValue", ref set.Name, 100);
+                }
+                else
+                {
+                    string key = "Condition Set At " + i.ToString();
+                    ImGuiHelper.DrawHotKeysPopup(key, string.Empty, (UiString.ConfigWindow_List_Remove.GetDescription(), DeleteFile, ["Delete"]));
+
+                    if (ImGui.Selectable(combos[i].Name))
+                    {
+                        Service.Config.ActionSequencerIndex = i;
+                    }
+
+                    ImGuiHelper.ExecuteHotKeysPopup(key, string.Empty, string.Empty, false,
+                        (DeleteFile, [VirtualKey.DELETE]));
+                }
+            }
+
+            ImGui.PushFont(UiBuilder.IconFont);
+
+            ImGui.PushStyleColor(ImGuiCol.Text, ImGuiColors.HealerGreen);
+            if (ImGui.Selectable(FontAwesomeIcon.Plus.ToIconString()))
+            {
+                ActionSequencerUpdater.AddNew();
+            }
+            ImGui.PopStyleColor();
+
+            if (ImGui.Selectable(FontAwesomeIcon.FileDownload.ToIconString()))
+            {
+                ActionSequencerUpdater.LoadFiles();
+            }
+
+            ImGui.PopFont();
+            ImguiTooltips.HoveredTooltip(UiString.ActionSequencer_Load.GetDescription());
+        }
         _allSearchable.DrawItems(Configs.BasicParams);
     }
     #endregion
@@ -90,6 +227,7 @@ public partial class RotationConfigWindow
         { UiString.ConfigWindow_Auto_ActionUsage.GetDescription, DrawActionUsageControl },
         { UiString.ConfigWindow_Auto_HealingCondition.GetDescription, DrawHealingActionCondition },
         { UiString.ConfigWindow_Auto_PvPSpecific.GetDescription, DrawPvPSpecificControls },
+        { UiString.ConfigWindow_Auto_StateCondition.GetDescription, () => _autoState?.Draw() },
     })
     {
         HeaderSize = HeaderSize,
@@ -126,6 +264,57 @@ public partial class RotationConfigWindow
         ImGui.Separator();
         _allSearchable.DrawItems(Configs.HealingActionCondition);
     }
+
+    private static readonly CollapsingHeaderGroup _autoState = new(new Dictionary<Func<string>, Action>
+    {
+        {
+            UiString.ConfigWindow_Auto_HealAreaConditionSet.GetDescription,
+            () => DataCenter.CurrentConditionValue.HealAreaConditionSet?.DrawMain(DataCenter.CurrentRotation)
+        },
+        {
+            UiString.ConfigWindow_Auto_HealSingleConditionSet.GetDescription,
+            () => DataCenter.CurrentConditionValue.HealSingleConditionSet?.DrawMain(DataCenter.CurrentRotation)
+        },
+        {
+            UiString.ConfigWindow_Auto_DefenseAreaConditionSet.GetDescription,
+            () => DataCenter.CurrentConditionValue.DefenseAreaConditionSet?.DrawMain(DataCenter.CurrentRotation)
+        },
+        {
+            UiString.ConfigWindow_Auto_DefenseSingleConditionSet.GetDescription,
+            () => DataCenter.CurrentConditionValue.DefenseSingleConditionSet?.DrawMain(DataCenter.CurrentRotation)
+        },
+        {
+            UiString.ConfigWindow_Auto_DispelStancePositionalConditionSet.GetDescription,
+            () => DataCenter.CurrentConditionValue.DispelStancePositionalConditionSet?.DrawMain(DataCenter.CurrentRotation)
+        },
+        {
+            UiString.ConfigWindow_Auto_RaiseShirkConditionSet.GetDescription,
+            () => DataCenter.CurrentConditionValue.RaiseShirkConditionSet?.DrawMain(DataCenter.CurrentRotation)
+        },
+        {
+            UiString.ConfigWindow_Auto_MoveForwardConditionSet.GetDescription,
+            () => DataCenter.CurrentConditionValue.MoveForwardConditionSet?.DrawMain(DataCenter.CurrentRotation)
+        },
+        {
+            UiString.ConfigWindow_Auto_MoveBackConditionSet.GetDescription,
+            () => DataCenter.CurrentConditionValue.MoveBackConditionSet?.DrawMain(DataCenter.CurrentRotation)
+        },
+        {
+            UiString.ConfigWindow_Auto_AntiKnockbackConditionSet.GetDescription,
+            () => DataCenter.CurrentConditionValue.AntiKnockbackConditionSet?.DrawMain(DataCenter.CurrentRotation)
+        },
+        {
+            UiString.ConfigWindow_Auto_SpeedConditionSet.GetDescription,
+            () => DataCenter.CurrentConditionValue.SpeedConditionSet?.DrawMain(DataCenter.CurrentRotation)
+        },
+        {
+            UiString.ConfigWindow_Auto_NoCastingConditionSet.GetDescription,
+            () => DataCenter.CurrentConditionValue.NoCastingConditionSet?.DrawMain(DataCenter.CurrentRotation)
+        },
+    })
+    {
+        HeaderSize = HeaderSize,
+    };
     #endregion
 
     #region Target

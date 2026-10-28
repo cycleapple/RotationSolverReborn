@@ -7,7 +7,12 @@ using RotationSolver.Data;
 namespace RotationSolver.UI.SearchableConfigs;
 
 internal class CheckBoxSearchCondition(PropertyInfo property, params ISearchable[] children)
-    : CheckBoxSearch(property, children)
+    : CheckBoxSearch(property,
+    [
+        new CheckBoxEnable(property),
+        new CheckBoxDisable(property),
+        .. children,
+    ])
 {
     private abstract class CheckBoxConditionAbstract : CheckBoxSearch
     {
@@ -18,7 +23,7 @@ internal class CheckBoxSearchCondition(PropertyInfo property, params ISearchable
 
         public override string ID => base.ID + Name;
 
-        public override bool ShowInChild => false;
+        public override bool ShowInChild => Service.Config.UseAdditionalConditions;
 
         public CheckBoxConditionAbstract(PropertyInfo property) : base(property)
         {
@@ -29,6 +34,8 @@ internal class CheckBoxSearchCondition(PropertyInfo property, params ISearchable
                 {
                     return;
                 }
+
+                GetCondition()?.DrawMain(DataCenter.CurrentRotation);
             };
         }
 
@@ -78,7 +85,7 @@ internal class CheckBoxSearchCondition(PropertyInfo property, params ISearchable
 
     private ConditionBoolean Condition => (ConditionBoolean)_property.GetValue(Service.Config)!;
 
-    public override bool AlwaysShowChildren => false;
+    public override bool AlwaysShowChildren => Service.Config.UseAdditionalConditions;
 
     protected override bool Value
     {
@@ -95,6 +102,7 @@ internal class CheckBoxSearchCondition(PropertyInfo property, params ISearchable
     {
         if (AlwaysShowChildren)
         {
+            ConditionDrawer.DrawCondition(Condition);
             ImGui.SameLine();
         }
         base.DrawMiddle();
