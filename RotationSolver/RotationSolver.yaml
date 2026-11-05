@@ -1,4 +1,4 @@
-﻿
+
 name: Rotation Solver Reborn
 author: The Combat Reborn Team
 description: |-
@@ -12,7 +12,7 @@ description: |-
 punchline: 分析每一幀的戰鬥資訊並找出最佳技能。
 repo_url: https://github.com/cycleapple/RotationSolverReborn/tree/api13-tw
 icon_url: https://raw.githubusercontent.com/FFXIV-CombatReborn/RotationSolverReborn/main/Images/Logo.png
-dalamud_api_level: 13
+dalamud_api_level: 14
 tags:
   - combat
   - rotation

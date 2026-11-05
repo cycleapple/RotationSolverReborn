@@ -26,7 +26,7 @@ public class ActionTimelineManager : IDisposable
     private DateTime? _combatStartTime = null;
     private bool _wasInCombat = false;
     
-    private delegate void OnActorControlDelegate(uint entityId, uint type, uint buffID, uint direct, uint actionId, uint sourceId, uint arg4, uint arg5, ulong targetId, byte a10);  
+    private delegate void OnActorControlDelegate(uint entityId, uint type, uint buffID, uint direct, uint actionId, uint sourceId, uint arg4, uint arg5, uint arg6, uint arg7, ulong targetId, byte a10);
     [Signature("E8 ?? ?? ?? ?? 0F B7 0B 83 E9 64", DetourName = nameof(OnActorControl))]
     private readonly Hook<OnActorControlDelegate>? _onActorControlHook = null;
 
@@ -181,9 +181,9 @@ public class ActionTimelineManager : IDisposable
         _lastItem.CastingTime = MathF.Min(maxTime, _lastItem.CastingTime);
     }
 
-    private void OnActorControl(uint entityId, uint type, uint buffID, uint direct, uint actionId, uint sourceId, uint arg4, uint arg5, ulong targetId, byte a10)
+    private void OnActorControl(uint entityId, uint type, uint buffID, uint direct, uint actionId, uint sourceId, uint arg4, uint arg5, uint arg6, uint arg7, ulong targetId, byte a10)
     {
-        _onActorControlHook?.Original(entityId, type, buffID, direct, actionId, sourceId, arg4, arg5, targetId, a10);
+        _onActorControlHook?.Original(entityId, type, buffID, direct, actionId, sourceId, arg4, arg5, arg6, arg7, targetId, a10);
 
         try
         {
