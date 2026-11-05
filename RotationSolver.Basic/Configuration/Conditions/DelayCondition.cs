@@ -1,4 +1,4 @@
-﻿using ECommons.GameHelpers;
+using ECommons.GameHelpers;
 
 namespace RotationSolver.Basic.Configuration.Conditions;
 
@@ -57,7 +57,7 @@ internal abstract class DelayCondition : ICondition
 
     public virtual bool CheckBefore(ICustomRotation rotation)
     {
-        return Player.AvailableThreadSafe;
+        return ECommons.DalamudServices.Svc.PlayerState.IsLoaded;
     }
 
     internal static bool CheckBaseAction(ICustomRotation rotation, ActionID id, ref IBaseAction? action)

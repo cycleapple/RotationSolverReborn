@@ -1,4 +1,4 @@
-﻿using Dalamud.Common;
+using Dalamud.Common;
 using Dalamud.Common.Game;
 using Dalamud.Game.ClientState.Keys;
 using Dalamud.Interface.Colors;
@@ -280,7 +280,7 @@ public partial class RotationConfigWindow : Window
             return true;
         }
 
-        return Player.AvailableThreadSafe && (Player.Job == Job.CRP || Player.Job == Job.BSM || Player.Job == Job.ARM || Player.Job == Job.GSM ||
+        return ECommons.DalamudServices.Svc.PlayerState.IsLoaded && (Player.Job == Job.CRP || Player.Job == Job.BSM || Player.Job == Job.ARM || Player.Job == Job.GSM ||
         Player.Job == Job.LTW || Player.Job == Job.WVR || Player.Job == Job.ALC || Player.Job == Job.CUL ||
         Player.Job == Job.MIN || Player.Job == Job.FSH || Player.Job == Job.BTN);
     }
@@ -397,7 +397,7 @@ public partial class RotationConfigWindow : Window
         {
             errorText = $"請停用 {_crashPlugins[0].Name}，此插件可能造成衝突或遊戲崩潰。";
         }
-        else if (Player.AvailableThreadSafe && (Player.Job == Job.CRP || Player.Job == Job.BSM || Player.Job == Job.ARM || Player.Job == Job.GSM ||
+        else if (ECommons.DalamudServices.Svc.PlayerState.IsLoaded && (Player.Job == Job.CRP || Player.Job == Job.BSM || Player.Job == Job.ARM || Player.Job == Job.GSM ||
                 Player.Job == Job.LTW || Player.Job == Job.WVR || Player.Job == Job.ALC || Player.Job == Job.CUL ||
                 Player.Job == Job.MIN || Player.Job == Job.FSH || Player.Job == Job.BTN))
         {
@@ -940,7 +940,7 @@ public partial class RotationConfigWindow : Window
             return;
         }
 
-        if (!Player.AvailableThreadSafe)
+        if (!ECommons.DalamudServices.Svc.PlayerState.IsLoaded)
         {
             return;
         }
@@ -1770,7 +1770,7 @@ public partial class RotationConfigWindow : Window
             return;
         }
 
-        if (!Player.AvailableThreadSafe)
+        if (!ECommons.DalamudServices.Svc.PlayerState.IsLoaded)
         {
             return;
         }
@@ -1920,7 +1920,7 @@ public partial class RotationConfigWindow : Window
             ImGuiHelper.ReactPopup(key, command, Reset, false);
         }
 
-        if (Player.AvailableThreadSafe && DataCenter.PartyMembers != null && Player.Object.IsJobs(Job.DNC))
+        if (ECommons.DalamudServices.Svc.PlayerState.IsLoaded && DataCenter.PartyMembers != null && Player.Object.IsJobs(Job.DNC))
         {
             ImGui.Spacing();
             ImGui.Text("舞伴優先順序");
@@ -1972,7 +1972,7 @@ public partial class RotationConfigWindow : Window
             }
         }
 
-        if (Player.AvailableThreadSafe && DataCenter.PartyMembers != null && Player.Object.IsJobs(Job.SGE))
+        if (ECommons.DalamudServices.Svc.PlayerState.IsLoaded && DataCenter.PartyMembers != null && Player.Object.IsJobs(Job.SGE))
         {
             ImGui.Spacing();
             ImGui.Text("心關坦克優先順序");
@@ -2024,7 +2024,7 @@ public partial class RotationConfigWindow : Window
             }
         }
 
-        if (Player.AvailableThreadSafe && DataCenter.PartyMembers != null && Player.Object.IsJobs(Job.AST))
+        if (ECommons.DalamudServices.Svc.PlayerState.IsLoaded && DataCenter.PartyMembers != null && Player.Object.IsJobs(Job.AST))
         {
             using ImRaii.IEndObject table = ImRaii.Table("AstCardPriorityTable", 2, ImGuiTableFlags.SizingStretchProp);
             if (!table)
@@ -2352,7 +2352,7 @@ public partial class RotationConfigWindow : Window
 
         static void DrawActionDebug()
         {
-            if (!Player.AvailableThreadSafe || !Service.Config.InDebug)
+            if (!ECommons.DalamudServices.Svc.PlayerState.IsLoaded || !Service.Config.InDebug)
             {
                 return;
             }
@@ -3211,7 +3211,7 @@ public partial class RotationConfigWindow : Window
                 OtherConfiguration.BeneficialPositions[territoryId] = pts = [];
             }
 
-            if (ImGui.Button(UiString.ConfigWindow_List_AddPosition.GetDescription()) && Player.AvailableThreadSafe)
+            if (ImGui.Button(UiString.ConfigWindow_List_AddPosition.GetDescription()) && ECommons.DalamudServices.Svc.PlayerState.IsLoaded)
             {
                 unsafe
                 {
@@ -3290,7 +3290,7 @@ public partial class RotationConfigWindow : Window
     {
         _allSearchable.DrawItems(Configs.Debug);
 
-        if (!Player.AvailableThreadSafe || !Service.Config.InDebug)
+        if (!ECommons.DalamudServices.Svc.PlayerState.IsLoaded || !Service.Config.InDebug)
         {
             return;
         }
@@ -3463,7 +3463,7 @@ public partial class RotationConfigWindow : Window
 
         ImGui.Spacing();
         ImGui.Text($"Statuses:");
-        foreach (Dalamud.Game.ClientState.Statuses.Status status in Player.Object.StatusList)
+        foreach (Dalamud.Game.ClientState.Statuses.IStatus status in Player.Object.StatusList)
         {
             string source = status.SourceId == Player.Object.GameObjectId ? "You" : Svc.Objects.SearchById(status.SourceId) == null ? "None" : "Others";
             byte stacks = Player.Object.StatusStack(true, (StatusID)status.StatusId);
@@ -3707,7 +3707,7 @@ public partial class RotationConfigWindow : Window
             ImGui.Text($"Targetable: {battleChara.Struct()->Character.GameObject.TargetableStatus}");
             ImGui.Spacing();
             ImGui.Text($"Statuses:");
-            foreach (Dalamud.Game.ClientState.Statuses.Status status in battleChara.StatusList)
+            foreach (Dalamud.Game.ClientState.Statuses.IStatus status in battleChara.StatusList)
             {
                 string source = status.SourceId == Player.Object.GameObjectId ? "You" : Svc.Objects.SearchById(status.SourceId) == null ? "None" : "Others";
                 ImGui.Text($"{status.GameData.Value.Name}: {status.StatusId} From: {source}");

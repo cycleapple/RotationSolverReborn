@@ -23,7 +23,7 @@ internal static class MajorUpdater
     {
         get
         {
-            if (!Player.AvailableThreadSafe)
+            if (!ECommons.DalamudServices.Svc.PlayerState.IsLoaded)
                 return false;
 
             // Consider the game valid when not transitioning or logging out.

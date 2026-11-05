@@ -1,4 +1,4 @@
-﻿using ECommons.GameHelpers;
+using ECommons.GameHelpers;
 using RotationSolver.Basic.Traits;
 
 namespace RotationSolver.Basic.Configuration.Conditions;
@@ -29,7 +29,7 @@ internal class TraitCondition : DelayCondition
 
     protected override bool IsTrueInside(ICustomRotation rotation)
     {
-        if (_trait == null || !Player.AvailableThreadSafe)
+        if (_trait == null || !ECommons.DalamudServices.Svc.PlayerState.IsLoaded)
         {
             return false;
         }

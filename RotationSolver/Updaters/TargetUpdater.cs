@@ -1,4 +1,4 @@
-﻿using ECommons.DalamudServices;
+using ECommons.DalamudServices;
 using ECommons.ExcelServices;
 using ECommons.GameFunctions;
 using ECommons.GameHelpers;
@@ -321,7 +321,7 @@ internal static partial class TargetUpdater
                 {
                     for (int i = 0; i < person.StatusList.Length; i++)
                     {
-                        Dalamud.Game.ClientState.Statuses.Status? status = person.StatusList[i];
+                        Dalamud.Game.ClientState.Statuses.IStatus? status = person.StatusList[i];
                         if (status != null && status.IsDangerous())
                         {
                             hasDangerous = true;
@@ -367,7 +367,7 @@ internal static partial class TargetUpdater
                 {
                     for (int i = 0; i < member.StatusList.Length; i++)
                     {
-                        Dalamud.Game.ClientState.Statuses.Status? status = member.StatusList[i];
+                        Dalamud.Game.ClientState.Statuses.IStatus? status = member.StatusList[i];
                         if (status != null && status.CanDispel())
                         {
                             targetList.Add(member);

@@ -175,7 +175,7 @@ public sealed class RotationSolverPlugin : IDalamudPlugin, IDisposable
 
         static void DutyState_DutyStarted(object? sender, ushort e)
         {
-            if (!Player.AvailableThreadSafe)
+            if (!ECommons.DalamudServices.Svc.PlayerState.IsLoaded)
             {
                 return;
             }
@@ -194,7 +194,7 @@ public sealed class RotationSolverPlugin : IDalamudPlugin, IDisposable
 
         static void DutyState_DutyWiped(object? sender, ushort e)
         {
-            if (!Player.AvailableThreadSafe)
+            if (!ECommons.DalamudServices.Svc.PlayerState.IsLoaded)
             {
                 return;
             }

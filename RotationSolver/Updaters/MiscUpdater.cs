@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.Gui.Dtr;
+using Dalamud.Game.Gui.Dtr;
 using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
 using ECommons.DalamudServices;
@@ -198,7 +198,7 @@ internal static class MiscUpdater
         List<float> statusTimes = [];
         if (Player.Object?.StatusList != null)
         {
-            foreach (Dalamud.Game.ClientState.Statuses.Status status in Player.Object.StatusList)
+            foreach (Dalamud.Game.ClientState.Statuses.IStatus status in Player.Object.StatusList)
             {
                 // No LINQ used here, Contains is a method on the collection
                 if (OtherConfiguration.NoCastingStatus.Contains(status.StatusId))

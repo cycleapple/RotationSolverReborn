@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.ClientState.Statuses;
+using Dalamud.Game.ClientState.Statuses;
 using ECommons.Automation;
 using ECommons.GameHelpers;
 using ECommons.GameFunctions;
@@ -327,7 +327,7 @@ public static class StatusHelper
 
     internal static IEnumerable<float> StatusTimes(this IBattleChara battleChara, bool isFromSelf, params StatusID[] statusIDs)
     {
-        foreach (Status status in battleChara.GetStatus(isFromSelf, statusIDs))
+        foreach (IStatus status in battleChara.GetStatus(isFromSelf, statusIDs))
         {
             yield return status.RemainingTime == 0f ? float.MaxValue : status.RemainingTime;
         }
@@ -364,7 +364,7 @@ public static class StatusHelper
 
     private static IEnumerable<byte> StatusStacks(this IBattleChara battleChara, bool isFromSelf, params StatusID[] statusIDs)
     {
-        foreach (Status status in battleChara.GetStatus(isFromSelf, statusIDs))
+        foreach (IStatus status in battleChara.GetStatus(isFromSelf, statusIDs))
         {
             yield return (byte)(status.Param == 0 ? byte.MaxValue : status.Param);
         }
@@ -397,7 +397,7 @@ public static class StatusHelper
             return true;
         }
 
-        foreach (Status _ in battleChara.GetStatus(isFromSelf, statusIDs))
+        foreach (IStatus _ in battleChara.GetStatus(isFromSelf, statusIDs))
         {
             return true;
         }
@@ -460,7 +460,7 @@ public static class StatusHelper
         try
         {
             Chat.SendMessage($"/statusoff {GetStatusName(status)}");
-            PluginLog.Information($"Status {GetStatusName(status)} removed successfully.");
+            PluginLog.Information($"IStatus {GetStatusName(status)} removed successfully.");
         }
         catch (Exception ex)
         {
@@ -492,7 +492,7 @@ public static class StatusHelper
     /// <param name="isFromSelf">Whether the statuses are from self.</param>
     /// <param name="statusIDs">The status IDs to look for.</param>
     /// <returns>An enumerable of statuses.</returns>
-private static IEnumerable<Status> GetStatus(this IBattleChara battleChara, bool isFromSelf, params StatusID[] statusIDs)
+private static IEnumerable<IStatus> GetStatus(this IBattleChara battleChara, bool isFromSelf, params StatusID[] statusIDs)
     {
         if (battleChara == null)
         {
@@ -528,7 +528,7 @@ private static IEnumerable<Status> GetStatus(this IBattleChara battleChara, bool
 
         for (int i = 0; i < statusList.Length; i++)
         {
-            Status? status = statusList[i];
+            IStatus? status = statusList[i];
             if (status == null || status.StatusId == 0)
             {
                 continue;
@@ -555,7 +555,7 @@ private static IEnumerable<Status> GetStatus(this IBattleChara battleChara, bool
     /// </summary>
     /// <param name="status">The status to check.</param>
     /// <returns>True if the status is invincible, otherwise false.</returns>
-    public static bool IsInvincible(this Status status)
+    public static bool IsInvincible(this IStatus status)
     {
         if (status == null)
         {
@@ -587,7 +587,7 @@ private static IEnumerable<Status> GetStatus(this IBattleChara battleChara, bool
     /// </summary>
     /// <param name="status">The status to check.</param>
     /// <returns>True if the status is a priority, otherwise false.</returns>
-    public static bool IsPriority(this Status status)
+    public static bool IsPriority(this IStatus status)
     {
         if (status == null)
         {
@@ -614,7 +614,7 @@ private static IEnumerable<Status> GetStatus(this IBattleChara battleChara, bool
     /// </summary>
     /// <param name="status">The status to check.</param>
     /// <returns>True if the status needs to be dispelled, otherwise false.</returns>
-    public static bool IsDangerous(this Status status)
+    public static bool IsDangerous(this IStatus status)
     {
         if (status == null)
         {
@@ -656,7 +656,7 @@ private static IEnumerable<Status> GetStatus(this IBattleChara battleChara, bool
     /// </summary>
     /// <param name="status">The status to check.</param>
     /// <returns>True if the status can be dispelled, otherwise false.</returns>
-    public static bool CanDispel(this Status status)
+    public static bool CanDispel(this IStatus status)
     {
         return status != null && status.GameData.Value.CanDispel == true && status.RemainingTime > 1 + DataCenter.DefaultGCDRemain;
     }
@@ -664,7 +664,7 @@ private static IEnumerable<Status> GetStatus(this IBattleChara battleChara, bool
     /// <summary>
     /// 
     /// </summary>
-    public static bool CanStatusOff(this Status status)
+    public static bool CanStatusOff(this IStatus status)
     {
         return status != null && status.GameData.Value.CanStatusOff == true && status.RemainingTime > 1 + DataCenter.DefaultGCDRemain;
     }
@@ -672,7 +672,7 @@ private static IEnumerable<Status> GetStatus(this IBattleChara battleChara, bool
     /// <summary>
     /// 
     /// </summary>
-    public static bool LockActions(this Status status)
+    public static bool LockActions(this IStatus status)
     {
         return status != null && status.GameData.Value.LockActions == true && status.RemainingTime > 1 + DataCenter.DefaultGCDRemain;
     }
@@ -680,7 +680,7 @@ private static IEnumerable<Status> GetStatus(this IBattleChara battleChara, bool
     /// <summary>
     /// 
     /// </summary>
-    public static bool LockMovement(this Status status)
+    public static bool LockMovement(this IStatus status)
     {
         return status != null && status.GameData.Value.LockMovement == true && status.RemainingTime > 1 + DataCenter.DefaultGCDRemain;
     }
@@ -688,7 +688,7 @@ private static IEnumerable<Status> GetStatus(this IBattleChara battleChara, bool
     /// <summary>
     /// 
     /// </summary>
-    public static bool LockControl(this Status status)
+    public static bool LockControl(this IStatus status)
     {
         return status != null && status.GameData.Value.LockControl == true && status.RemainingTime > 1 + DataCenter.DefaultGCDRemain;
     }
@@ -696,7 +696,7 @@ private static IEnumerable<Status> GetStatus(this IBattleChara battleChara, bool
     /// <summary>
     /// Unknown3 is used to determine if the status indicates a tether.
     /// </summary>
-    public static bool IsTether(this Status status)
+    public static bool IsTether(this IStatus status)
     {
         return status != null && status.GameData.Value.Unknown3 == true && status.RemainingTime > 1 + DataCenter.DefaultGCDRemain;
     }

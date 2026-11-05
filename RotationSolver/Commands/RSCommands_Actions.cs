@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.ClientState.Conditions;
+using Dalamud.Game.ClientState.Conditions;
 using ECommons.DalamudServices;
 using ECommons.ExcelServices;
 using ECommons.GameHelpers;
@@ -231,7 +231,7 @@ namespace RotationSolver.Commands
                     ActionUpdater.AutoCancelTime = DateTime.MinValue;
                 }
 
-                if (!Player.AvailableThreadSafe)
+                if (!ECommons.DalamudServices.Svc.PlayerState.IsLoaded)
                 {
                     return;
                 }

@@ -1,12 +1,12 @@
 {
   "version": 1,
   "dependencies": {
-    "net9.0-windows7.0": {
+    "net10.0-windows7.0": {
       "DalamudPackager": {
         "type": "Direct",
-        "requested": "[13.1.0, )",
-        "resolved": "13.1.0",
-        "contentHash": "XdoNhJGyFby5M/sdcRhnc5xTop9PHy+H50PTWpzLhJugjB19EDBiHD/AsiDF66RETM+0qKUdJBZrNuebn7qswQ=="
+        "requested": "[14.0.1, )",
+        "resolved": "14.0.1",
+        "contentHash": "y0WWyUE6dhpGdolK3iKgwys05/nZaVf4ZPtIjpLhJBZvHxkkiE23zYRo7K7uqAgoK/QvK5cqF6l3VG5AbgC6KA=="
       },
       "DotNet.ReproducibleBuilds": {
         "type": "Direct",
@@ -16,9 +16,9 @@
       },
       "ECommons": {
         "type": "Direct",
-        "requested": "[3.0.1.20, )",
-        "resolved": "3.0.1.20",
-        "contentHash": "dvBP03mG+qU9IsbWY8OboYtEVPS+Ba8L5v4xibfTD5eIdkL8xcT44hDvTZPmQfyR/9BpfH9Vq1pv4p3DwXXCxw=="
+        "requested": "[3.1.0.29, )",
+        "resolved": "3.1.0.29",
+        "contentHash": "BFntZNmab1tbfIAc4l4sqVBZtecp4yJ7TtbKCZzLRXSaf4wy0xhTknMlCoJYZX15NqeoL7PK1wIjnJK8Wg9m9g=="
       },
       "ExCSS": {
         "type": "Transitive",
@@ -35,9 +35,7 @@
         "resolved": "4.14.0",
         "contentHash": "PC3tuwZYnC+idaPuoC/AZpEdwrtX7qFpmnrfQkgobGIWiYmGi5MCRtl5mx6QrfMGQpK78X2lfIEoZDLg/qnuHg==",
         "dependencies": {
-          "Microsoft.CodeAnalysis.Analyzers": "3.11.0",
-          "System.Collections.Immutable": "9.0.0",
-          "System.Reflection.Metadata": "9.0.0"
+          "Microsoft.CodeAnalysis.Analyzers": "3.11.0"
         }
       },
       "Microsoft.CodeAnalysis.CSharp": {
@@ -46,9 +44,7 @@
         "contentHash": "568a6wcTivauIhbeWcCwfWwIn7UV7MeHEBvFB2uzGIpM2OhJ4eM/FZ8KS0yhPoNxnSpjGzz7x7CIjTxhslojQA==",
         "dependencies": {
           "Microsoft.CodeAnalysis.Analyzers": "3.11.0",
-          "Microsoft.CodeAnalysis.Common": "[4.14.0]",
-          "System.Collections.Immutable": "9.0.0",
-          "System.Reflection.Metadata": "9.0.0"
+          "Microsoft.CodeAnalysis.Common": "[4.14.0]"
         }
       },
       "Microsoft.Win32.SystemEvents": {
@@ -65,11 +61,6 @@
           "System.Drawing.Common": "5.0.3"
         }
       },
-      "System.Collections.Immutable": {
-        "type": "Transitive",
-        "resolved": "9.0.0",
-        "contentHash": "QhkXUl2gNrQtvPmtBTQHb0YsUrDiDQ2QS09YbtTTiSjGcf7NBqtYbrG/BE06zcBPCKEwQGzIv13IVdXNOSub2w=="
-      },
       "System.Drawing.Common": {
         "type": "Transitive",
         "resolved": "9.0.9",
@@ -77,11 +68,6 @@
         "dependencies": {
           "Microsoft.Win32.SystemEvents": "9.0.9"
         }
-      },
-      "System.Reflection.Metadata": {
-        "type": "Transitive",
-        "resolved": "9.0.0",
-        "contentHash": "ANiqLu3DxW9kol/hMmTWbt3414t9ftdIuiIU7j80okq2YzAueo120M442xk1kDJWtmZTqWQn7wHDvMRipVOEOQ=="
       },
       "rotationsolver.sourcegenerators": {
         "type": "Project",
@@ -92,8 +78,8 @@
       "RotationSolverReborn.Basic": {
         "type": "Project",
         "dependencies": {
-          "ECommons": "[3.0.1.20, )",
-          "RotationSolver.SourceGenerators": "[1.0.0, )",
+          "ECommons": "[3.1.0.29, )",
+          "RotationSolver.SourceGenerators": "[7.3.5.4, )",
           "Svg": "[3.4.7, )",
           "System.Drawing.Common": "[9.0.9, )"
         }

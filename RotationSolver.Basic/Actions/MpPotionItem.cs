@@ -1,4 +1,4 @@
-﻿using ECommons.GameHelpers;
+using ECommons.GameHelpers;
 using Lumina.Excel.Sheets;
 
 namespace RotationSolver.Basic.Actions;
@@ -17,6 +17,6 @@ internal class MpPotionItem : BaseItem
     public override bool CanUse(out IAction item, bool clippingCheck)
     {
         item = this;
-        return Player.AvailableThreadSafe && Player.Object.MaxMp - DataCenter.CurrentMp >= MaxMp && base.CanUse(out item);
+        return ECommons.DalamudServices.Svc.PlayerState.IsLoaded && Player.Object.MaxMp - DataCenter.CurrentMp >= MaxMp && base.CanUse(out item);
     }
 }

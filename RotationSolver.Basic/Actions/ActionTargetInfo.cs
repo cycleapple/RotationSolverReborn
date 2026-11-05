@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.ClientState.Objects.SubKinds;
+using Dalamud.Game.ClientState.Objects.SubKinds;
 using ECommons.DalamudServices;
 using ECommons.ExcelServices;
 using ECommons.GameFunctions;
@@ -192,7 +192,7 @@ public struct ActionTargetInfo(IBaseAction action)
             return false;
         }
 
-        if (!Player.AvailableThreadSafe)
+        if (!ECommons.DalamudServices.Svc.PlayerState.IsLoaded)
         {
             return false;
         }

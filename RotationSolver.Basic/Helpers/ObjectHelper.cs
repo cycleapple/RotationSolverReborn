@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.ClientState.Conditions;
+using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.ClientState.Objects.Enums;
 using Dalamud.Game.ClientState.Objects.SubKinds;
 using ECommons;
@@ -166,7 +166,7 @@ public static class ObjectHelper
             return false;
         }
 
-        foreach (Dalamud.Game.ClientState.Statuses.Status status in battleChara.StatusList)
+        foreach (Dalamud.Game.ClientState.Statuses.IStatus status in battleChara.StatusList)
         {
             if (StatusHelper.IsInvincible(status) && ((DataCenter.IsPvP && !Service.Config.IgnorePvPInvincibility) || !DataCenter.IsPvP))
             {
@@ -733,7 +733,7 @@ public static class ObjectHelper
         // Ensure StatusList is not null before iterating
         if (battleChara.StatusList != null)
         {
-            foreach (Dalamud.Game.ClientState.Statuses.Status status in battleChara.StatusList)
+            foreach (Dalamud.Game.ClientState.Statuses.IStatus status in battleChara.StatusList)
             {
                 if (StatusHelper.IsPriority(status))
                 {

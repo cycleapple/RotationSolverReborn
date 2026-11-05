@@ -1,4 +1,4 @@
-﻿using ECommons.GameHelpers;
+using ECommons.GameHelpers;
 using Lumina.Excel.Sheets;
 
 namespace RotationSolver.Basic.Actions;
@@ -8,7 +8,7 @@ internal class HpPotionItem : BaseItem
     private readonly float _percent;
     private readonly uint _maxHp;
 
-    public uint MaxHp => !Player.AvailableThreadSafe ? 0 : Math.Min((uint)(Player.Object.MaxHp * _percent), _maxHp);
+    public uint MaxHp => !ECommons.DalamudServices.Svc.PlayerState.IsLoaded ? 0 : Math.Min((uint)(Player.Object.MaxHp * _percent), _maxHp);
 
     protected override bool CanUseThis => Service.Config.UseHpPotions;
 
@@ -22,6 +22,6 @@ internal class HpPotionItem : BaseItem
     public override bool CanUse(out IAction item, bool clippingCheck)
     {
         item = this;
-        return Player.AvailableThreadSafe && Player.Object.GetHealthRatio() <= Service.Config.HealthSingleAbilityHot && Player.Object.MaxHp - Player.Object.CurrentHp >= MaxHp && base.CanUse(out item);
+        return ECommons.DalamudServices.Svc.PlayerState.IsLoaded && Player.Object.GetHealthRatio() <= Service.Config.HealthSingleAbilityHot && Player.Object.MaxHp - Player.Object.CurrentHp >= MaxHp && base.CanUse(out item);
     }
 }

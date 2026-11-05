@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.ClientState.Conditions;
+using Dalamud.Game.ClientState.Conditions;
 using ECommons.DalamudServices;
 using ECommons.ExcelServices;
 using ECommons.GameHelpers;
@@ -43,12 +43,12 @@ internal static class DataCenter
 
     public static bool IsActivated()
     {
-        return Player.AvailableThreadSafe && (State || IsManual || Service.Config.TeachingMode);
+        return Svc.PlayerState.IsLoaded && (State || IsManual || Service.Config.TeachingMode);
     }
 
     public static bool PlayerAvailable()
     {
-        return Player.AvailableThreadSafe;
+        return Svc.PlayerState.IsLoaded;
     }
 
     internal static IBattleChara? HostileTarget
@@ -541,7 +541,7 @@ internal static class DataCenter
         get
         {
             float radius = 25;
-            if (!Player.AvailableThreadSafe)
+            if (!Svc.PlayerState.IsLoaded)
             {
                 return radius;
             }
@@ -933,7 +933,7 @@ internal static class DataCenter
 
     internal static unsafe void AddActionRec(Action act)
     {
-        if (!Player.AvailableThreadSafe)
+        if (!Svc.PlayerState.IsLoaded)
         {
             return;
         }
@@ -1181,7 +1181,7 @@ internal static class DataCenter
     {
         return IsCastingVfx([.. VfxDataQueue], s =>
         {
-            if (!Player.AvailableThreadSafe)
+            if (!Svc.PlayerState.IsLoaded)
             {
                 return false;
             }
@@ -1205,7 +1205,7 @@ internal static class DataCenter
     {
         return IsCastingVfx([.. VfxDataQueue], s =>
         {
-            if (!Player.AvailableThreadSafe)
+            if (!Svc.PlayerState.IsLoaded)
             {
                 return false;
             }
@@ -1227,7 +1227,7 @@ internal static class DataCenter
     {
         return IsCastingVfx([.. VfxDataQueue], s =>
         {
-            return Player.AvailableThreadSafe && (s.Path.StartsWith("vfx/lockon/eff/coshare")
+            return Svc.PlayerState.IsLoaded && (s.Path.StartsWith("vfx/lockon/eff/coshare")
             || s.Path.StartsWith("vfx/lockon/eff/share_laser")
             || s.Path.StartsWith("vfx/lockon/eff/com_share"));
         });
